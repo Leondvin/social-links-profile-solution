@@ -1,0 +1,132 @@
+:root {
+    /* colors */
+    --black: rgb(0, 0, 0);
+    --card-box-shadow-color: hsl(from var(--black) h s l / .2);
+    --white: hsl(0, 0%, 100%);
+    --green: hsl(75, 94%, 57%);
+    --grey-700: hsl(0, 0%, 20%);
+    --grey-800: hsl(0, 0%, 12%);
+    --grey-900: hsl(0, 0%, 8%);
+    /* font */
+    --font-family: 'Inter', sans-serif;
+    --font-weight-200: 200;
+    --font-weight-400: 400;
+    --font-weight-600: 600;
+    --font-weight-700: 700;
+    --body-font-size: 14px;
+    --user-name-font-size: 1.625rem;  /* 26px */
+    --user-about-font-size: .938rem;  /* 15px */
+    /* sizing */
+    --card-border-radius: .875rem;  /* 14px */
+    --card-box-shadow: 0 .5rem .5rem var(--card-box-shadow-color);
+    --box-shadow-inner: inset 0 0 4px var(--black);
+    --profile-image-width: 5.5rem;  /* 88px */
+    --profile-image-border-radius: 50%;
+    --grid-column-width: 18.5rem;  /* 296px */
+    --grid-column-width-desktop: 20rem;  /* 320px */
+    --grid-gap: 1rem;  /* 16px */
+    --social-link-border-radius: .438rem;  /* 7px */
+    --margin-xs: .5rem;  /* 8px */
+    --margin-s: .75rem;  /* 12px */
+    --margin-m: 1.5rem;  /* 24px */
+    --margin-l: 1.75rem;  /* 28px */
+    --padding-s: 1rem;  /* 16px */
+    --padding-m: 1.375rem;  /* 22px */
+    --padding-l: 2.5rem;  /* 40px */
+}
+html {
+    font-size: 16px;  /* 1rem: 16px */
+}
+body {
+    background-color: var(--grey-900);
+    color: var(--white);
+    text-align: center;
+    font-family: var(--font-family);
+    font-size: var(--body-font-size);
+    font-weight: var(--font-weight-400);
+}
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  /* fallback of dvh (dynamic viewport height) */
+}
+@supports (height: 100dvh) {
+    main {
+        height: 100dvh;
+    }
+}
+.card {
+    background-color: var(--grey-800);
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--card-border-radius);
+    padding: var(--padding-m);
+    box-shadow: var(--card-box-shadow);
+}
+.img-container {
+    display: inline-block;
+    position: relative;
+    margin-bottom: var(--margin-m);
+}
+img {
+    /* img is inline by default. It sits on the text baseline, and have a gap at the bottom, to accommodate text descenders. By turning it into a block-level element, we get rid of that gap. */
+    display: block;
+    width: var(--profile-image-width);
+    height: auto;
+    border-radius: var(--profile-image-border-radius);
+}
+/* adding an inner shadow as an overlay */
+.img-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    border-radius: var(--profile-image-border-radius);
+    box-shadow: var(--box-shadow-inner);
+}
+h1 {
+    font-size: var(--user-name-font-size);
+    font-weight: var(--font-weight-600);
+    margin-bottom: var(--margin-s);
+}
+.user-location {
+    color: var(--green);
+    font-weight: var(--font-weight-600);
+    margin-bottom: var(--margin-l);
+}
+.user-about {
+    font-size: var(--user-about-font-size);
+    font-weight: var(--font-weight-200);
+    margin-bottom: var(--margin-m);
+}
+.socials-list {
+    display: grid;
+    grid-template-columns: var(--grid-column-width);
+    justify-items: stretch;
+    gap: var(--grid-gap);
+}
+a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: var(--font-weight-600);
+    background-color: var(--grey-700);
+    display: inline-block;
+    width: 100%;
+    padding: var(--padding-s);
+    border-radius: var(--social-link-border-radius);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+a:hover {
+    background-color: var(--green);
+    color: var(--grey-800)
+}
+@media only screen and (min-width: 1440px) {
+    .card {
+        padding: var(--padding-l);
+    }
+    .socials-list {  
+        grid-template-columns: var(--grid-column-width-desktop);
+    }
+}
